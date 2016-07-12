@@ -9,8 +9,10 @@ The syntax of the
 however, seems to be an exception.
 This repo provides some resources that hopefully make its syntax clearer.
 
-See the main **[demo page](http://waldyrious.github.io/understand-svg-arcs)**,
-as well as the [links below](#resources) for more in-depth explanations.
+See the main **[demo page](http://waldyrious.github.io/understand-svg-arcs)** (screendhot below),
+as well as the links in the [resources section](#resources) for more in-depth explanations.
+
+![screenshot](https://cloud.githubusercontent.com/assets/478237/16767397/28df4988-4837-11e6-9f3b-b266d825bec1.png)
 
 ## Details
 
