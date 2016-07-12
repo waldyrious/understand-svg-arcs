@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+
+<title>SVG Arcs</title>
+	<meta charset="utf-8" />
+    <link rel="stylesheet" href="http://rawgit.com/waldyrious/default.css/master/default.css" />
+</head>
+<body>
+<h2>SVG Path: Elliptical Arc</h2>
+<p>Lines are simple; two points on a path uniquely determine the line segment between them. Since an infinite number of curves can be drawn between two points, you must give additional information to draw a curved path between them. The simplest of the curves we will examine is the elliptical arc &#8212; that is, drawing a section of an ellipse that connects two points.
+</p><p>Although arcs are visually the simplest curves, specifying a unique arc requires the <i>most</i> information. The first pieces of information you need to specify are the <i>x</i>- and <i>y</i>-radii of the ellipse on which the points lie. This narrows it down to two possible ellipses, as you can see in section (a) of <a href="http://commons.oreilly.com/wiki/index.php/SVG_Essentials/Paths#svgess-CHP-6-FIG-4" title="SVG Essentials/Paths">Figure 6-4</a>. The two points divide the two ellipses into four arcs. Two of them, (b) and (c), are arcs that measure less than 180 degrees. The other two, (d) and (e) are greater than 180 degrees. If you look at (b) and (c), you will notice that they are differentiated by their direction; (b) is drawn in the direction of increasing negative angle, and (c) in the direction of increasing positive angle. The same relationship holds true between (d) and (e).
+</p><p>But wait &#8212; we still haven&#8217;t uniquely specified the potential arcs! There&#8217;s no law that says that the ellipse has to have its <i>x</i>-radius parallel to the <i>x</i>-axis. Part (f) of <a href="http://commons.oreilly.com/wiki/index.php/SVG_Essentials/Paths#svgess-CHP-6-FIG-4" title="SVG Essentials/Paths">Figure 6-4</a> shows the two points with their candidate ellipses rotated thirty degrees with respect to the <i>x</i>-axis.
+</p>
+<div>
+<p><b>Figure 6-4. Variations of the elliptical arc command</b>
+</p>
+    <p><a href="http://commons.oreilly.com/wiki/index.php/Image:SVG_Essentials_I_6_tt106.png" title="Variations of the elliptical arc command"><img alt="Variations of the elliptical arc command" src="SVG_Essentials_I_6_tt106.png" border="0"/></a></p>
+    </div>
+    <p>(<a href="http://commons.oreilly.com/wiki/index.php/SVG_Essentials/Paths#svgess-CHP-6-FIG-4" title="SVG Essentials/Paths">Figure 6-4</a> is adapted from the one found in section 8.3.8 of the World Wide Web Consortium&#8217;s SVG specification.)</p>
+    <p>Thus, an arc command begins with the <tt>A</tt> abbreviation for absolute coordinates or <tt>a</tt> for relative coordinates, and is followed by seven parameters:</p>
+    <ul>
+        <li> The <i>x</i>- and <i>y</i>-radius of the ellipse on which the points lie.</li>
+        <li> The <tt><i>x-axis-rotation</i></tt> of the ellipse.</li>
+        <li> The <tt><i>large-arc-flag</i></tt>, which is zero if the arc&#8217;s measure is less than 180 degrees, or one if the arc&#8217;s measure is greater than or equal to 180 degrees.</li>
+        <li> The <tt><i>sweep-flag</i></tt>, which is zero if the arc is to be drawn in the negative angle direction, or one if the arc is to be drawn in the positive angle direction.</li>
+        <li> The ending <i>x</i>- and <i>y</i>- coordinates of the ending point. (The starting point is determined by the last point drawn or the last <i>moveto</i> command.)</li>
+    </ul>
+    <p>Here are the paths used to draw the elliptical arcs in sections (b) through (e) of <a href="http://commons.oreilly.com/wiki/index.php/SVG_Essentials/Paths#svgess-CHP-6-FIG-4" title="SVG Essentials/Paths">Figure 6-4</a>:
+    </p>
+    
+    <pre>&lt;path d="M 125,75 A100,50 0 0,0 225,125"/&gt; &lt;!-- b --&gt;
+&lt;path d="M 125,75 A100,50 0 0,1 225,125"/&gt; &lt;!-- c --&gt;
+&lt;path d="M 125,75 A100,50 0 1,0 225,125"/&gt; &lt;!-- d --&gt;
+&lt;path d="M 125,75 A100,50 0 1,1 225,125"/&gt; &lt;!-- e --&gt;</pre>
+    
+    <h3>Technique: Converting from Other Arc Formats</h3>
+    <p>Some other vector graphics systems let you specify an arc by defining a center point for the ellipse, its <i>x</i>- and <i>y</i>-radius, the starting angle, and the extent of the angle&#8217;s arc. This is a straightforward method of specification, and is excellent for drawing arcs as single objects. This, paradoxically, is exactly why SVG instead chooses such a seemingly eccentric method to specify arcs. In SVG, an arc is not presumed to be living in lonely splendor; it is intended to be part of a connected path of lines and curves. (For example, a rounded rectangle is precisely that: a series of lines and elliptical arcs.) Thus, it makes sense to specify an arc by its endpoints.
+    </p><p>Sometimes, though, you do want an isolated semicircle (or, more accurately, semi-ellipse). Presume that you have an ellipse specified as:
+    </p>
+    <pre>&lt;ellipse cx="<i>cx</i>" cy="<i>cy</i>" rx="<i>rx</i>" ry="<i>ry</i>"/&gt;</pre>
+    <p>Here are the paths to draw the four possible semi-ellipses:
+    </p>
+    <pre>&lt;!-- northern hemisphere --&gt;
+&lt;path d="M <i>cx</i>-<i>rx</i> 
+            <i>cy</i> A <i>rx</i> 
+            <i>ry</i> 0 1 1 <i>cx</i>+<i>rx</i> 
+            <i>cy</i>"/&gt;
+&lt;!-- southern hemipshere --&gt;
+&lt;path d="M <i>cx</i>-<i>rx</i> 
+            <i>cy</i> A <i>rx</i> 
+            <i>ry</i> 0 1 0 <i>cx</i>+<i>rx</i> 
+            <i>cy</i>"/&gt;
+&lt;!-- eastern hemisphere --&gt;
+&lt;path d="M <i>cx</i> 
+            <i>cy</i>-<i>ry</i> A <i>rx</i> 
+            <i>ry</i> 0 1 1 <i>cx</i> 
+            <i>cy</i>+<i>ry</i>"/&gt;
+&lt;!-- western hemisphere --&gt;
+&lt;path d="M <i>cx</i> 
+            <i>cy</i>-<i>ry</i> A <i>rx</i> 
+            <i>ry</i> 0 1 0 <i>cx</i> 
+            <i>cy</i>+<i>ry</i>"/&gt;</pre>
+    <p>For the more general case, when you wish to draw an arbitrary arc that has been specified in &#8220;center-and-angles&#8221; notation and wish to convert it to SVG&#8217;s &#8220;endpoint-and-sweep&#8221; format, use the following Perl script. It prompts you for center coordinates, radii, starting angle, and angle extent. The output is a <tt>&lt;path&gt;</tt> tag that you can insert into your SVG files.
+    </p>
+    <pre>#!/usr/bin/perl
+use Math::Trig;
+
+#
+#   Convert an elliptical arc based around a central point
+#   to an elliptical arc parameterized for SVG.
+#
+#   Input is a list containing:
+#       center x coordinate
+#       center y coordinate
+#       x-radius of ellipse
+#       y-radius of ellipse
+#       beginning angle of arc in degrees
+#       arc extent in degrees
+#       x-axis rotation angle in degrees
+#
+#   Output is a list containing:
+#
+#       x-coordinate of beginning of arc
+#       y-coordinate of beginning of arc
+#       x-radius of ellipse
+#       y-radius of ellipse
+#       large-arc-flag as defined in SVG specification
+#       sweep-flag  as defined in SVG specification
+#       x-coordinate of endpoint of arc
+#       y-coordinate of endpoint of arc
+#
+sub convert_to_svg
+{
+    my ($cx, $cy, $rx, $ry, $theta1, $delta, $phi) = @_;
+
+    my $theta2 = $delta + $theta1;
+    $theta1 = deg2rad($theta1);
+    $theta2 = deg2rad($theta2);
+    my $phi_r = deg2rad($phi);
+
+    #
+    #   Figure out the coordinates of the beginning and
+    #   ending points
+    #
+    my $x0 = $cx + cos($phi_r) * $rx * cos($theta1) +
+        sin(-$phi_r) * $ry * sin($theta1);
+    my $y0 = $cy + sin($phi_r) * $rx * cos($theta1) +
+        cos($phi_r) * $ry * sin($theta1);
+
+    my $x1 = $cx + cos($phi_r) * $rx * cos($theta2) +
+        sin(-$phi_r) * $ry * sin($theta2);
+    my $y1 = $cy + sin($phi_r) * $rx * cos($theta2) +
+        cos($phi_r) * $ry * sin($theta2);
+
+    my $large_arc = ($delta &gt; 180)&#160;? 1&#160;: 0;
+    my $sweep = ($delta &gt; 0)&#160;? 1&#160;: 0;
+    
+    return ($x0, $y0, $rx, $ry, $phi, $large_arc, $sweep, $x1, $y1);
+}
+
+#
+#   Request input
+#
+print "Enter center x,y coordinates &gt; ";
+$data = &lt;&gt;;
+$data =~ s/,/ /g;
+($cx, $cy) = split /\s+/, $data;
+
+print "Enter x and y radii &gt; ";
+$data = &lt;&gt;;
+$data =~ s/,/ /g;
+($rx, $ry) = split/\s+/, $data;
+
+print "Enter starting angle in degrees &gt; ";
+$theta = &lt;&gt;;
+chomp $theta;
+
+print "Enter angle extent in degrees &gt; ";
+$delta = &lt;&gt;;
+chomp $delta;
+
+print "Enter angle of rotation in degrees &gt; ";
+$phi = &lt;&gt;;
+chomp $phi;
+
+#
+#   Echo original data
+#
+print "(cx,cy)=($cx,$cy)  rx=$rx ry=$ry ",
+    "start angle=$theta extent=$delta rotate=$phi\n";
+
+($x0, $y0, $rx, $ry, $phi, $large_arc_flag, $sweep_flag, $x1, $y1) =
+    convert_to_svg( $cx, $cy, $rx, $ry, $theta, $delta, $phi);
+
+#
+#   Produce a &lt;path&gt; element that fits the
+#   specifications
+#
+print "&lt;path d=\"M $x0 $y0 ",   # Moveto initial point
+    "A $rx $ry ",               # Arc command and radii,
+    "$phi ",                    # angle of rotation,
+    "$large_arc_flag ",         # the "large-arc" flag,
+    "$sweep_flag ",             # the "sweep" flag,
+    "$x1 $y1\"/&gt;\n";            # and the endpoint
+    </pre>
+    <p>If you wish to convert from the SVG format to a &#8220;center-and-angles&#8221; format, the mathematics is considerably more complex. You can see the formulas in detail in the SVG specification. This Perl script was adapted from the code in the Apache XML Batik project.
+    </p>
+    <pre>#!/usr/bin/perl
+use Math::Trig;
+
+#
+#   Convert an elliptical arc based around a central point
+#   to an elliptical arc parameterized for SVG.
+#
+#   Input is a list containing:
+#
+#       x-coordinate of beginning of arc
+#       y-coordinate of beginning of arc
+#       x-radius of ellipse
+#       y-radius of ellipse
+#       large-arc-flag as defined in SVG specification
+#       sweep-flag  as defined in SVG specification
+#       x-coordinate of endpoint of arc
+#       y-coordinate of endpoint of arc
+#
+#   Output is a list containing:
+#       center x coordinate
+#       center y coordinate
+#       x-radius of ellipse
+#       y-radius of ellipse
+#       beginning angle of arc in degrees
+#       arc extent in degrees
+#       x-axis rotation angle in degrees
+#
+
+sub convert_from_svg
+{
+    my ($x0, $y0, $rx, $ry, $phi, $large_arc, $sweep, $x, $y) = @_;
+    
+    # Compute 1/2 distance between current and final point
+    my $dx2 = ($x0 - $x) / 2.0;
+    my $dy2 = ($y0 - $y) / 2.0;
+
+    # Convert from degrees to radians
+    $phi&#160;%= 360;
+    my $phi_r = deg2rad($phi);
+
+    # Compute (x1, y1)
+    my $x1 = cos($phi_r) * $dx2 + sin($phi_r) * $dy2;
+    my $y1 = -sin($phi_r) * $dx2 + cos($phi_r) * $dy2;
+
+    # Make sure radii are large enough
+    $rx = abs($rx); $ry = abs($ry);
+    my $rx_sq = $rx * $rx;
+    my $ry_sq = $ry * $ry;
+    my $x1_sq = $x1 * $x1;
+    my $y1_sq = $y1 * $y1;
+
+    $radius_check = ($x1_sq / $rx_sq) + ($y1_sq / $ry_sq);
+    if ($radius_check &gt; 1)
+    {
+        $rx *= sqrt($radius_check);
+        $ry *= sqrt($adius_check);
+        $rx_sq = $rx * $rx;
+        $ry_sq = $ry * $ry;
+    }
+
+    # Step 2: Compute (cx1, cy1)
+
+    my $sign = ($large_arc == $sweep)&#160;? -1&#160;: 1;
+    my $sq = (($rx_sq * $ry_sq) - ($rx_sq * $y1_sq) - ($ry_sq * $x1_sq)) /
+        (($rx_sq * $y1_sq) + ($ry_sq * $x1_sq));
+    $sq = ($sq &lt; 0)&#160;? 0&#160;: $sq;
+    my $coef = $sign * sqrt($sq);
+    my $cx1 = $coef * (($rx * $y1) / $ry);
+    my $cy1 = $coef * -(($ry * $x1) / $rx);
+
+    #   Step 3: Compute (cx, cy) from (cx1, cy1)
+
+    my $sx2 = ($x0 + $x) / 2.0;
+    my $sy2 = ($y0 + $y) / 2.0;
+
+    my $cx = $sx2 + (cos($phi_r) * $cx1 - sin($phi_r) * $cy1);
+    my $cy = $sy2 + (sin($phi_r) * $cx1 + cos($phi_r) * $cy1);
+
+    #   Step 4: Compute angle start and angle extent
+
+    my $ux = ($x1 - $cx1) / $rx;
+    my $uy = ($y1 - $cy1) / $ry;
+    my $vx = (-$x1 - $cx1) / $rx;
+    my $vy = (-$y1 - $cy1) / $ry;
+    my $n = sqrt( ($ux * $ux) + ($uy * $uy) );
+    my $p = $ux; # 1 * ux + 0 * uy
+    $sign = ($uy &lt; 0)&#160;? -1&#160;: 1;
+
+    my $theta = $sign * acos( $p / $n );
+    $theta = rad2deg($theta);
+
+    $n = sqrt(($ux * $ux + $uy * $uy) * ($vx * $vx + $vy * $vy));
+    $p = $ux * $vx + $uy * $vy;
+    $sign = (($ux * $vy - $uy * $vx) &lt; 0)&#160;? -1&#160;: 1;
+    my $delta = $sign * acos( $p / $n );
+    $delta = rad2deg($delta);
+
+    if ($sweep == 0 &amp;&amp; $delta &gt; 0)
+    {
+        $delta -= 360;
+    }
+    elsif ($sweep == 1 &amp;&amp; $delta &lt; 0)
+    {
+        $delta += 360;
+    }
+
+    $delta&#160;%= 360;
+    $theta&#160;%= 360;
+    
+    return ($cx, $cy, $rx, $ry, $theta, $delta, $phi);
+}
+     
+#
+#   Request input
+#
+print "Enter starting x,y coordinates &gt; ";
+$data = &lt;&gt;;
+$data =~ s/,/ /g;
+($x0, $y0) = split /\s+/, $data;
+
+print "Enter ending x,y coordinates &gt; ";
+$data = &lt;&gt;;
+$data =~ s/,/ /g;
+($x, $y) = split /\s+/, $data;
+
+print "Enter x and y radii &gt; ";
+$data = &lt;&gt;;
+$data =~ s/,/ /g;
+($rx, $ry) = split/\s+/, $data;
+
+print "Enter rotation angle in degrees ";
+$phi = &lt;&gt;;
+chomp $phi;
+
+print "Large arc flag (0=no, 1=yes) &gt; ";
+$large_arc = &lt;&gt;;
+chomp $large_arc;
+
+print "Sweep flag (0=negative, 1=positive) &gt; ";
+$sweep = &lt;&gt;;
+chomp $sweep;
+
+print "From ($x0,$y0) to ($x,$y) rotate $phi",
+    " large arc=$large_arc sweep=$sweep\n";
+
+($cx, $cy, $rx, $ry, $theta, $delta, $phi) =
+    convert_from_svg( $x0, $y0, $rx, $ry, $phi, $large_arc, $sweep, 
+       $x, $y );
+
+print "Ellipse center = ($cx, $cy)\n";
+print "Start angle = $theta\n";
+print "Angle extent = $delta\n";</pre>
+    <cite>
+        Content retrieved from
+        <a href="commons.oreilly.com/wiki/index.php/SVG_Essentials/Paths#Elliptical_Arc">O'Reilly Commons</a>.
+    </cite>
+</body>
+</html>
