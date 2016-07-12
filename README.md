@@ -4,7 +4,9 @@
 but upon closer examination,
 most of the commands can be understood pretty intuitively.
 
-The syntax of the **arc command**, however, seems to be an exception.
+The syntax of the
+**[arc command](https://www.w3.org/TR/SVG/paths.html#PathDataEllipticalArcCommands)**,
+however, seems to be an exception.
 This repo provides some resources that hopefully make its syntax clearer.
 
 See the main **[demo page](http://waldyrious.github.io/understand-svg-arcs)**,
@@ -12,7 +14,8 @@ as well as the [links below](#resources) for more in-depth explanations.
 
 ## Details
 
-The awkward [syntax of the arc command](https://www.w3.org/TR/SVG/implnote.html#ArcSyntax)
+The awkward
+[syntax of the arc command](https://www.w3.org/TR/SVG/implnote.html#ArcSyntax)
 comes out of the desire to unify the syntax of the svg path commands,
 so that all path commands end with the coordinates of the new "current point".
 
@@ -47,18 +50,22 @@ arc parametrization.
 
 ## Resources
 
-The main example on this repo takes inspiration from the excellent diagram
-in the [OReilly Commons wiki](http://commons.oreilly.com/wiki/index.php/SVG_Essentials/Paths#Elliptical_Arc).
+The main example on this repo takes inspiration from the excellent diagram in the 
+[OReilly Commons wiki](http://commons.oreilly.com/wiki/index.php/SVG_Essentials/Paths#Elliptical_Arc).
 
 The SVG implementation of this diagram was inspired by
-[Jakob Jenkov](https://github.com/jjenkov)'s excellent [svg paths tutorial](http://tutorials.jenkov.com/svg/path-element.html#arcs),
-with some help from his [svg markers tutorial](http://tutorials.jenkov.com/svg/marker-element.html)
+[Jakob Jenkov](https://github.com/jjenkov)'s excellent
+[svg paths tutorial](http://tutorials.jenkov.com/svg/path-element.html#arcs),
+with some help from his
+[svg markers tutorial](http://tutorials.jenkov.com/svg/marker-element.html)
 for the arrow heads. He also made a
 [video version of the svg paths tutorial](https://youtu.be/k6TWzfLGAKo?t=2m52s)
-(content about arcs starts at 2:52), which helps visualize the effects of the arc command parameters.
+(content about arcs starts at 2:52),
+which helps visualize the effects of the arc command parameters.
 
 Another nice video explanation is
-[this one](https://youtu.be/Iyb3R_1NkEU?t=10m42s) by [Glenn Howes](https://github.com/grhowes)
+[this one](https://youtu.be/Iyb3R_1NkEU?t=10m42s)
+by [Glenn Howes](https://github.com/grhowes)
 (content about arcs starts at 10:42).
 [The iOS app used in the video](https://itunes.apple.com/us/app/svg-paths/id690371196)
 seems to be an interesting way to experiment with arcs interactively.
