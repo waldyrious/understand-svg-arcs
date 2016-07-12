@@ -4,9 +4,10 @@
 but upon closer examination,
 most of the commands can be understood pretty intuitively.
 
-The syntax of the **arc command** seems to be an exception to this rule.
+The syntax of the **arc command**, however, seems to be an exception.
 This repo provides some resources that hopefully make its syntax clearer.
-See the main [demo page](http://waldyrious.github.io/understand-svg-arcs),
+
+See the main **[demo page](http://waldyrious.github.io/understand-svg-arcs)**,
 as well as the [links below](#resources) for more in-depth explanations.
 
 ## Details
