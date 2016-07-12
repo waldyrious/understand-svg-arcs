@@ -1,0 +1,102 @@
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <link rel="stylesheet" href="http://rawgit.com/waldyrious/default.css/master/default.css" />
+</head>
+<body>
+    <h2>SVG elliptical arcs</h2>
+
+    <svg viewBox="0 0 1000 1200" version = "1.1" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+        <marker id="markerArrow" markerWidth="13" markerHeight="13" refX="2" refY="6" orient="auto">
+            <path d="M0,4 V8 L3,6 z" fill="crimson"/>
+        </marker>
+        <g stroke="black" stroke-width="3" fill="none">
+            <text y="20" stroke="none" fill="black">
+                <tspan x="50" dy="0">rotation: 0º;  radius-x: 100;  radius-y: 50;</tspan>
+                <tspan x="50" dy="20">arc-size: small (0);</tspan>
+                <tspan x="50" dy="20">direction: counterclockwise (0)</tspan>
+            </text>
+            <path d="M 100 200 A 100 50 0.0 0 1 250 150" stroke="silver"/>
+            <path d="M 100 200 A 100 50 0.0 1 0 250 150" stroke="silver"/>
+            <path d="M 100 200 A 100 50 0.0 1 1 250 150" stroke="silver"/>
+            <path d="M 100 200 A 100 50 0.0 0 0 250 150" stroke="crimson" marker-end="url(#markerArrow)"/>
+        </g>
+        <g stroke="black" stroke-width="3" fill="none" transform="translate(400,0)">
+            <text y="20" stroke="none" fill="black">
+                <tspan x="50" dy="0">rotation: 0º;  radius-x: 100;  radius-y: 50;</tspan>
+                <tspan x="50" dy="20">arc-size: small (0);</tspan>
+                <tspan x="50" dy="20">direction: clockwise (1)</tspan>
+            </text>
+            <path d="M 100 200 A 100 50 0.0 0 0 250 150" stroke="silver"/>
+            <path d="M 100 200 A 100 50 0.0 1 0 250 150" stroke="silver"/>
+            <path d="M 100 200 A 100 50 0.0 1 1 250 150" stroke="silver"/>
+            <path d="M 100 200 A 100 50 0.0 0 1 250 150" stroke="crimson" marker-end="url(#markerArrow)"/>
+        </g>
+        <g stroke="black" stroke-width="3" fill="none" transform="translate(0,300)">
+            <text y="20" stroke="none" fill="black">
+                <tspan x="50" dy="0">rotation: 0º;  radius-x: 100;  radius-y: 50;</tspan>
+                <tspan x="50" dy="20">arc-size: large (1);</tspan>
+                <tspan x="50" dy="20">direction: counterclockwise (0)</tspan>
+            </text>
+            <path d="M 100 200 A 100 50 -15 0 0 250 150" stroke="silver"/>
+            <path d="M 100 200 A 100 50 -15 0 1 250 150" stroke="silver"/>
+            <path d="M 100 200 A 100 50 -15 1 1 250 150" stroke="silver"/>
+            <path d="M 100 200 A 100 50 -15 1 0 250 150" stroke="crimson" marker-end="url(#markerArrow)"/>
+        </g>
+        <g stroke="black" stroke-width="3" fill="none" transform="translate(400,300)">
+            <text y="20" stroke="none" fill="black">
+                <tspan x="50" dy="0">rotation: 0º;  radius-x: 100;  radius-y: 50;</tspan>
+                <tspan x="50" dy="20">arc-size: large (1);</tspan>
+                <tspan x="50" dy="20">direction: clockwise (1)</tspan>
+            </text>
+            <path d="M 100 200 A 100 50 -15 0 0 250 150" stroke="silver"/>
+            <path d="M 100 200 A 100 50 -15 0 1 250 150" stroke="silver"/>
+            <path d="M 100 200 A 100 50 -15 1 0 250 150" stroke="silver"/>
+            <path d="M 100 200 A 100 50 -15 1 1 250 150" stroke="crimson" marker-end="url(#markerArrow)"/>
+        </g>
+        <g stroke="black" stroke-width="3" fill="none" transform="translate(0,600)">
+            <text y="20" stroke="none" fill="black">
+                <tspan x="50" dy="0">rotation: -15º;  radius-x: 100;  radius-y: 50;</tspan>
+                <tspan x="50" dy="20">arc-size: small (0);</tspan>
+                <tspan x="50" dy="20">direction: counterclockwise (0)</tspan>
+            </text>
+            <path d="M 100 200 A 100 50 -44 1 0 250 150" stroke="silver"/>
+            <path d="M 100 200 A 100 50 -44 0 1 250 150" stroke="silver"/>
+            <path d="M 100 200 A 100 50 -44 1 1 250 150" stroke="silver"/>
+            <path d="M 100 200 A 100 50 -44 0 0 250 150" stroke="crimson" marker-end="url(#markerArrow)"/>
+        </g>
+        <g stroke="black" stroke-width="3" fill="none" transform="translate(400,600)">
+            <text y="20" stroke="none" fill="black">
+                <tspan x="50" dy="0">rotation: -15º;  radius-x: 100;  radius-y: 50;</tspan>
+                <tspan x="50" dy="20">arc-size: small (0);</tspan>
+                <tspan x="50" dy="20">direction: clockwise (1)</tspan>
+            </text>
+            <path d="M 100 200 A 100 50 -44 0 0 250 150" stroke="silver"/>
+            <path d="M 100 200 A 100 50 -44 1 1 250 150" stroke="silver"/>
+            <path d="M 100 200 A 100 50 -44 1 0 250 150" stroke="silver"/>
+            <path d="M 100 200 A 100 50 -44 0 1 250 150" stroke="crimson" marker-end="url(#markerArrow)"/>
+        </g>
+        <g stroke="black" stroke-width="3" fill="none" transform="translate(0,900)">
+            <text y="20" stroke="none" fill="black">
+                <tspan x="50" dy="0">rotation: -15º;  radius-x: 100;  radius-y: 50;</tspan>
+                <tspan x="50" dy="20">arc-size: large (1);</tspan>
+                <tspan x="50" dy="20">direction: counterclockwise (0)</tspan>
+            </text>
+            <path d="M 100 200 A 100 50 -45 0 0 250 150" stroke="silver"/>
+            <path d="M 100 200 A 100 50 -45 0 1 250 150" stroke="silver"/>
+            <path d="M 100 200 A 100 50 -45 1 1 250 150" stroke="silver"/>
+            <path d="M 100 200 A 100 50 -45 1 0 250 150" stroke="crimson" marker-end="url(#markerArrow)"/>
+        </g>
+        <g stroke="black" stroke-width="3" fill="none" transform="translate(400,900)">
+            <text y="20" stroke="none" fill="black">
+                <tspan x="50" dy="0">rotation: -15º;  radius-x: 100;  radius-y: 50;</tspan>
+                <tspan x="50" dy="20">arc-size: large (1);</tspan>
+                <tspan x="50" dy="20">direction: clockwise (1)</tspan>
+            </text>
+            <path d="M 100 200 A 100 50 -45 0 0 250 150" stroke="silver"/>
+            <path d="M 100 200 A 100 50 -45 0 1 250 150" stroke="silver"/>
+            <path d="M 100 200 A 100 50 -45 1 0 250 150" stroke="silver"/>
+            <path d="M 100 200 A 100 50 -45 1 1 250 150" stroke="crimson" marker-end="url(#markerArrow)"/>
+        </g>
+    </svg>
+</body>
+</html>
