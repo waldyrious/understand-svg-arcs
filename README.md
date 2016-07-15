@@ -36,7 +36,7 @@ with a given rotation<sup>†</sup>, and that passes through the start point
 given at the end of the preceding path command, and the end point
 given at the end of the arc command.
 
-<sup>†</sup>Note that the rotation maintains the start and end points,
+><sup>†</sup>Note that the rotation maintains the start and end points,
 whereas a rotation with the transform attribute (outside the path description)
 would cause the entire path, including the start and end points, to be rotated.
 
