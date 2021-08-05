@@ -59,6 +59,8 @@ as a practical example that may help understand the textual description above.
 
 ![screenshot](https://cloud.githubusercontent.com/assets/478237/16767397/28df4988-4837-11e6-9f3b-b266d825bec1.png)
 
+## Resources
+
 The demo above takes inspiration from the excellent diagram in the 
 [OReilly Commons wiki](http://commons.oreilly.com/wiki/index.php/SVG_Essentials/Paths#Elliptical_Arc).
 
