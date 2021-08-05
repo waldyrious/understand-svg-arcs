@@ -1,6 +1,6 @@
 # Understanding SVG arcs
 
-**SVG paths** can be daunting at first,
+**[SVG paths](https://www.w3.org/TR/SVG/paths.html)** can be daunting at first,
 but upon closer examination,
 most of the commands can be understood pretty intuitively.
 
@@ -9,31 +9,30 @@ The syntax of the
 however, seems to be an exception.
 This repo provides some resources that hopefully make its syntax clearer.
 
-See the main **[demo page](http://waldyrious.github.io/understand-svg-arcs)** (screenshot below),
-as well as the links in the [resources section](#resources) for more in-depth explanations.
-
-![screenshot](https://cloud.githubusercontent.com/assets/478237/16767397/28df4988-4837-11e6-9f3b-b266d825bec1.png)
-
-## Details
+## Explanation
 
 The awkward
 [syntax of the arc command](https://www.w3.org/TR/SVG/implnote.html#ArcSyntax)
-comes out of the desire to unify the syntax of the svg path commands,
-so that all path commands end with the coordinates of the new "current point".
+is due to it being designed to match the structure of the other SVG path commands,
+all of which consist of one or more pairs of (x,y) coordinates,
+the last one being the coordinates of the new "current point" of the "pen"
+(to follow the analogy of a [plotter](https://en.wikipedia.org/wiki/Plotter)).
 
 However, just like a circle is defined more intuitively
 by specifying the center and radius,
 an elliptical arc is also best understood
 if defined by its center, the minor and major radius,
 the starting angle and the angular span it covers.
+The fact that SVG requires a different way to specify an arc
+is what makes it weird and cumbersome to understand. 
 
 The best way to think of SVG's "endpoint parametrization"
 is as providing parameters to a
 **[constraint solver](https://en.wikipedia.org/wiki/Constraint_programming)**:
 the arc has to follow an ellipse
-with a given width/height ratio (x-radius vs. y-radius),
-with a given rotation<sup>†</sup>, and that passes through the start point
-given at the end of the preceding path command, and the end point
+with a given **width/height ratio** (x-radius vs. y-radius),
+with a given **rotation**<sup>†</sup>, and that passes through the **start point**
+given at the end of the preceding path command, and the **end point**
 given at the end of the arc command.
 
 ><sup>†</sup>Note that the rotation maintains the start and end points,
@@ -45,14 +44,22 @@ These restrictions (with a few
 result in two possible ellipses,
 and four corresponding elliptical arcs
 connecting the two endpoints.
-The "large arc" and "sweep" flags then provide disambiguation
-between these four arc possibilities,
+The **large arc** and **sweep** flags (specified as 0 or 1)
+then provide disambiguation between these four arc possibilities,
 giving a unique, unambiguous (but highly unintuitive)
 arc parametrization.
 
-## Resources
+## Practical example
 
-The main example on this repo takes inspiration from the excellent diagram in the 
+The live **[demo page](http://waldyrious.github.io/understand-svg-arcs)** (screenshot below),
+showcases a few variations of an arc command
+with the same starting and ending point (100,200 and 250,150),
+along with the ellipses that are used for their construction,
+as a practical example that may help understand the textual description above.
+
+![screenshot](https://cloud.githubusercontent.com/assets/478237/16767397/28df4988-4837-11e6-9f3b-b266d825bec1.png)
+
+The demo above takes inspiration from the excellent diagram in the 
 [OReilly Commons wiki](http://commons.oreilly.com/wiki/index.php/SVG_Essentials/Paths#Elliptical_Arc).
 
 The SVG implementation of this diagram was inspired by
