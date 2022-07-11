@@ -2,18 +2,22 @@
 
 **[SVG paths](https://www.w3.org/TR/SVG/paths.html)** can be daunting at first,
 but upon closer examination,
-most of the commands can be understood pretty intuitively.
+most of the path data commands
+(provided in the `d` attribute of a `<path>` element)
+can be understood pretty intuitively.
 
 The syntax of the
 **[arc command](https://www.w3.org/TR/SVG/paths.html#PathDataEllipticalArcCommands)**,
-however, seems to be an exception.
-This repo provides some resources that hopefully make its syntax clearer.
+however, seems to be an exception,
+in that it defies easy interpretation even to the trained eye.
+This project provides some resources that hopefully make its syntax clearer.
 
 ## Explanation
 
 The awkward
 [syntax of the arc command](https://www.w3.org/TR/SVG/implnote.html#ArcSyntax)
-is due to it being designed to match the structure of the other SVG path commands,
+is due to it being designed to match the structure of the other
+[path data commands](https://www.w3.org/TR/SVG/paths.html#PathData),
 all of which consist of one or more pairs of (x,y) coordinates,
 the last one being the coordinates of the new "current point" of the "pen"
 (to follow the analogy of a [plotter](https://en.wikipedia.org/wiki/Plotter)).
@@ -31,13 +35,9 @@ is as providing parameters to a
 **[constraint solver](https://en.wikipedia.org/wiki/Constraint_programming)**:
 the arc has to follow an ellipse
 with a given **width/height ratio** (x-radius vs. y-radius),
-with a given **rotation**<sup>†</sup>, and that passes through the **start point**
+with a given **orientation**, and that passes through the **start point**
 given at the end of the preceding path command, and the **end point**
 given at the end of the arc command.
-
-><sup>†</sup>Note that the rotation maintains the start and end points,
-whereas a rotation with the transform attribute (outside the path description)
-would cause the entire path, including the start and end points, to be rotated.
 
 These restrictions (with a few
 [adjustments to prevent unsolvable constraints](https://www.w3.org/TR/SVG/implnote.html#ArcOutOfRangeParameters))
